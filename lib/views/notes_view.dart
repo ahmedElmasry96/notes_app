@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notes_app/views/widgets/custom_app_bar_widget.dart';
 import 'package:notes_app/views/widgets/custom_note_item_widget.dart';
 import 'package:notes_app/views/widgets/modal_bottom_sheet_widget.dart';
 
 class NotesView extends StatelessWidget {
   const NotesView({super.key});
-
+  static String id = "noteView";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +26,7 @@ class NotesView extends StatelessWidget {
             const SizedBox(
               height: 45,
             ),
-            const CustomAppBarWidget(),
+            const CustomAppBarWidget(icon: Icons.search, title: "Notes",),
             const SizedBox(
               height: 20,
             ),

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/views/widgets/custom_search_icon_widget.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes_app/views/widgets/custom_icon_widget.dart';
 
 class CustomAppBarWidget extends StatelessWidget {
-  const CustomAppBarWidget({super.key});
-
+  const CustomAppBarWidget({super.key, required this.icon, required this.title});
+  final IconData icon;
+  final String title;
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
-        Text("Notes", style: TextStyle(fontSize: 28),),
-        Spacer(),
-        CustomSearchIconWidget(),
+        Text(title, style: const TextStyle(fontSize: 28),),
+        const Spacer(),
+        CustomIconWidget(icon: icon),
       ],
     );
   }
