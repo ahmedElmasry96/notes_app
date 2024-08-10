@@ -20,16 +20,16 @@ class EditNoteView extends StatelessWidget {
             SizedBox(
               height: 45,
             ),
-            CustomTextFieldWidget(
-              hintText: "Title",
-            ),
+            // CustomTextFieldWidget(
+            //   hintText: "Title",
+            // ),
             SizedBox(
               height: 30,
             ),
-            CustomTextFieldWidget(
-              maxLines: 5,
-              hintText: "Body",
-            ),
+            // CustomTextFieldWidget(
+            //   maxLines: 5,
+            //   hintText: "Body",
+            // ),
           ],
         ),
       ),
