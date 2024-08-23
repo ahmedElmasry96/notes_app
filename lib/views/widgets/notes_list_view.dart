@@ -4,15 +4,24 @@ import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'custom_note_item_widget.dart';
 
-class NotesListView extends StatelessWidget {
+class NotesListView extends StatefulWidget {
   const NotesListView({super.key});
-  @override
 
+  @override
+  State<NotesListView> createState() => _NotesListViewState();
+}
+
+class _NotesListViewState extends State<NotesListView> {
+  @override
+  void initState() {
+    BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<NotesCubit, NotesState>(
       builder: (context, state) {
-        List<NoteModel> notes = BlocProvider.of<NotesCubit>(context).fetchAllNotes();
-        notes.sort((a, b) => b.date.compareTo(a.date));
+        List<NoteModel> notes = BlocProvider.of<NotesCubit>(context).notes ?? [];
         return ListView.builder(
             itemCount: notes.length,
             itemBuilder: (context, index) {
