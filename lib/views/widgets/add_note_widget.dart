@@ -17,6 +17,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   String? title, subTitle;
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -29,7 +30,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
             onSaved: (value) {
               title = value;
             }, validator: (value) {
-            if(value?.isEmpty ?? true) {
+            if (value?.isEmpty ?? true) {
               return "Title is required";
             }
             return null;
@@ -46,7 +47,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
               subTitle = value;
             },
             validator: (value) {
-              if(value?.isEmpty ?? true) {
+              if (value?.isEmpty ?? true) {
                 return "SubTitle is required";
               }
               return null;
@@ -55,19 +56,25 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
           const SizedBox(
             height: 40,
           ),
-          CustomBottomWidget(
-              onTap: () {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState!.save();
-                  NoteModel noteModel = NoteModel(title: title!, subTitle: subTitle!, date: DateTime.now().toString(), color: Colors.blue.value);
-                  BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
-                } else {
-                  autoValidateMode = AutovalidateMode.always;
-                  setState(() {
-
-                  });
-                }
-              }
+          BlocBuilder<AddNoteCubit, AddNoteState>(
+            builder: (context, state) {
+              return CustomBottomWidget(
+                  isLoading: state is AddNoteLoading ? true : false,
+                  onTap: () {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                      NoteModel noteModel = NoteModel(title: title!,
+                          subTitle: subTitle!,
+                          date: DateTime.now().toString(),
+                          color: Colors.blue.value);
+                      BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                    } else {
+                      autoValidateMode = AutovalidateMode.always;
+                      setState(() {});
+                    }
+                  }
+              );
+            },
           ),
         ],
       ),
