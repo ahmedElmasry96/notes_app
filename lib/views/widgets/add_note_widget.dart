@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
+import 'package:notes_app/views/widgets/colors_list_view.dart';
 
 import 'custom_button_widget.dart';
 import 'custom_text_field_widget.dart';
@@ -18,7 +19,6 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   String? title, subTitle;
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -54,6 +54,10 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
               return null;
             },
           ),
+          const SizedBox(
+            height: 40,
+          ),
+          const ColorsListView(),
           const SizedBox(
             height: 40,
           ),
